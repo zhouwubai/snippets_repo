@@ -1,0 +1,109 @@
+If you do not install java environment to run this program, please ask me Wubai :) 
+to run test case when I am in lab or send me email (zhouwubai@gmail.com), 
+then I will run the test case when you are in the lab. Thanks
+
+discusstion question
+	Here I use TCP sockets, because for online purchase, any information loss or error means error.
+	So We must use reliable communication.
+
+
+This program includes four parts
+
+1. database (fiu.edu.db/DBUtil.java)
+	files and code related to this part locate in directory ./conf and source package fiu.edu.conf. 
+	its functionalities include configuration file for database (code for reading configuration file
+	locates in fiu.edu.conf) and connect to database.
+	
+2. file processor (fiu.edu.util/BookFileProcessor.java)
+	file processor parse file booklist.txt and store book information into database. 
+	
+	NOTE: when you want to run test again, but "books are sold out", please go to 
+	BookFileProcess.java and run it, this will restore the database. 
+	
+	
+3. server (fiu.edu.server/BookStoreServer.java)
+	accept client's request (order of buying book), then new a new thread (BookSellAgent.java) 
+	to handle this request. So this program is multithread and also I use synchronize mechanism
+	to handler multi-thread access same database. In BookOrder.java, I use java 
+	"synchronized method" mechanism to ensure that only one thread can access database.
+	
+	
+4. client(fiu.edu.client/BookStoreClient.java)
+	send request to server.  By the way, BookStoreClient implements interface Runnable which 
+	means it is a thread.
+
+	
+Some data structure/classes
+	Book.java defines data structure to represents one book record
+	BookOrder.java defines data structure to represents one book order replacement.
+	BookSellAgent.java implements Runnable class, thread to handler client's order.
+
+	
+	
+How to test.
+	Run BookStoreServer to run server.
+	Run BookStoreClient to run client. In main function, it will instantiate many clients (
+		you can change variable clientNum to change clients number).
+	Run BookFileProcessor to restore database.
+	
+	NOTE: you can change port in program, but you need change both at server and client, sorry
+		  for this inconvenient.
+	
+	
+	
+Other parts:
+	Util.java
+	In this file, there is a function call computeSha1OfString, which I used to generate some
+	special string using SHA-1 algorithm, which is appended to message sent by clients and used
+	to identify end of message.
+	
+	there is also a list variable  "bookNames" and function "genRandomBookName", which I used 
+	to produce random book order replacement in the test.
+	
+	
+	
+Error message:
+
+server not running
+	Couldn't get I/O for the connection to:127.0.0.1            
+	
+
+order successfully
+	Server: {"result":"true","msg":"you just ordered 1 Cracking the Coding Interview successfully.Whole cost is: 24.0"}
+	Server: {"result":"true","msg":"you just ordered 1 Computer Networking: A Top-Down Approach successfully.Whole cost is: 122.0"}
+	Server: {"result":"true","msg":"you just ordered 1 C Programming Language successfully.Whole cost is: 41.0"}
+
+
+no such book
+	Server: {"result":"false","msg":"The book you order does not exist."}
+	Server: {"result":"false","msg":"The book you order does not exist."}
+	Server: {"result":"false","msg":"The book you order does not exist."}
+
+
+book sold out
+	Server: {"result":"false","msg":"The book you order is not available now."}
+	
+	
+	
+One Real Test Result: (total client 20)
+
+Server: {"result":"true","msg":"you just ordered 1 Cracking the Coding Interview successfully.Whole cost is: 24.0"}
+Server: {"result":"true","msg":"you just ordered 1 Computer Networking: A Top-Down Approach successfully.Whole cost is: 122.0"}
+Server: {"result":"true","msg":"you just ordered 1 C Programming Language successfully.Whole cost is: 41.0"}
+Server: {"result":"false","msg":"The book you order does not exist."}
+Server: {"result":"false","msg":"The book you order does not exist."}
+Server: {"result":"false","msg":"The book you order does not exist."}
+Server: {"result":"true","msg":"you just ordered 1 Cracking the Coding Interview successfully.Whole cost is: 24.0"}
+Server: {"result":"true","msg":"you just ordered 1 C Programming Language successfully.Whole cost is: 41.0"}
+Server: {"result":"true","msg":"you just ordered 1 Computer Networking: A Top-Down Approach successfully.Whole cost is: 122.0"}
+Server: {"result":"false","msg":"The book you order does not exist."}
+Server: {"result":"true","msg":"you just ordered 1 Cracking the Coding Interview successfully.Whole cost is: 24.0"}
+Server: {"result":"false","msg":"The book you order does not exist."}
+Server: {"result":"true","msg":"you just ordered 1 Cracking the Coding Interview successfully.Whole cost is: 24.0"}
+Server: {"result":"true","msg":"you just ordered 1 Computer Networking: A Top-Down Approach successfully.Whole cost is: 122.0"}
+Server: {"result":"false","msg":"The book you order is not available now."}
+Server: {"result":"true","msg":"you just ordered 1 Introduction to Algorithms successfully.Whole cost is: 79.0"}
+Server: {"result":"true","msg":"you just ordered 1 C Programming Language successfully.Whole cost is: 41.0"}
+Server: {"result":"false","msg":"The book you order is not available now."}
+Server: {"result":"true","msg":"you just ordered 1 C Programming Language successfully.Whole cost is: 41.0"}
+Server: {"result":"false","msg":"The book you order is not available now."}

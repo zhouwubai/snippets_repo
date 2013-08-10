@@ -1,0 +1,27 @@
+Book Name: Cracking the Coding Interview
+authors: Gayle Laakmann McDowell
+ISBN: 098478280X 
+Edition: 5
+Price: 24
+Quantities: 10
+
+Book Name: Introduction to Algorithms
+authors: Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein
+ISBN: 0262033844
+Edition: 3
+Price: 79
+Quantities: 6
+
+Book Name: Computer Networking: A Top-Down Approach
+authors: James F. Kurose, Keith W. Ross
+ISBN: 0132856204
+Edition: 6
+Price: 122
+Quantities: 3
+
+Book Name: C Programming Language
+authors: Brian W. Kernighan, Dennis M. Ritchie
+ISBN: 0131103628 
+Edition: 2
+Price: 41
+Quantities: 6

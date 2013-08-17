@@ -1,19 +1,23 @@
 /**
- * apply this plugin into your website
- * @param selector choose which where you put the log status bar
- * @param indicator true, then put it before selector, other
+ * Apply fiu logger plugin into your web
+ * @param xPos apply right top-corner coordinate system to this logger div
+ * @param yPos
  */
-function applyFiuUserLogger(selector,indicator){
+function applyFiuUserLogger(xPos,yPos){
 	
 	var loginHtml = getLoginHtml();
 	var loginBtn = getLoginButton();
 	
-	if(indicator)
+/**	if(indicator)
 		$(selector).before(loginBtn);
 	else
 		$(selector).after(loginBtn);
+**/	
 	
+	$(loginBtn).appendTo('body');
 	$(loginHtml).appendTo('body');
+	$(".login_status").css("right",xPos);
+	$(".login_status").css("top",yPos);
 	
 	initialLoginStatus();
 	
@@ -34,7 +38,7 @@ function applyFiuUserLogger(selector,indicator){
 
 
 function getLoginButton(){
-	loginBtn = '<div class="login_status">' + 
+	loginBtn = '<div class="login_status" style="position:absolute;right:0;top:0;z-index:10">' + 
 		'<span id="welcome_info" style="color:red;display:none">welcome,</span>'+
 		'<a id="user_info" href="#"></a>' + '<span id="welcome_info">&nbsp;&nbsp;</span>' + 
 		'<a id="login-logout-tab" href="#">登录</a></div>';

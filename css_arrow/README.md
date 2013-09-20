@@ -1,0 +1,11 @@
+##Smaple 
+
+
+<div style="position:relative;height:100%;width:100%">
+        <div id="map_canvas">
+        </div>
+		
+		<div class="hidable_toggler" align="center" style="position: absolute;right: 50%;bottom: 0;">
+                <span class="hidable_toggler_btn"><em class="control_arrow_up"></em></span>
+        </div>
+</div>
